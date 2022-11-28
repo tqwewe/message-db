@@ -5,8 +5,7 @@ $func$
 BEGIN
   IF current_setting('message_store.outbox', true) = 'on' THEN
     CREATE TABLE IF NOT EXISTS message_store.outbox (
-      id UUID PRIMARY KEY REFERENCES message_store.messages,
-      global_position bigint NOT NULL
+      global_position bigint PRIMARY KEY REFERENCES message_store.messages
     );
   END IF;
 END

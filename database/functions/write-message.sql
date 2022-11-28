@@ -61,12 +61,10 @@ BEGIN
   IF current_setting('message_store.outbox', true) = 'on' THEN
     INSERT INTO outbox
       (
-        id,
         global_position
       )
     VALUES
       (
-        _message_id,
         _global_position
       )
     ;
