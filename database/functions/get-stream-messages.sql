@@ -10,7 +10,7 @@ DECLARE
   _command text;
   _setting text;
 BEGIN
-  IF is_category(get_stream_messages.stream_name) THEN
+  IF message_store.is_category(get_stream_messages.stream_name) THEN
     RAISE EXCEPTION
       'Must be a stream name: %',
       get_stream_messages.stream_name;
