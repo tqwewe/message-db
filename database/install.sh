@@ -70,9 +70,6 @@ function create-table {
 
   echo "» messages table"
   run_psql $database -f $base/tables/messages.sql
-  
-  echo "» outbox table"
-  run_psql $database -f $base/tables/outbox.sql
 }
 
 echo
