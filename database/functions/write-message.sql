@@ -12,7 +12,6 @@ DECLARE
   _message_id uuid;
   _stream_version bigint;
   _next_position bigint;
-  _global_position bigint;
 BEGIN
   PERFORM acquire_lock(write_message.stream_name);
 
@@ -54,23 +53,7 @@ BEGIN
       write_message.data,
       write_message.metadata
     )
-  RETURNING
-    global_position INTO _global_position
   ;
-
-  IF current_setting('message_store.outbox', true) = 'on' THEN
-    INSERT INTO outbox
-      (
-        id,
-        global_position
-      )
-    VALUES
-      (
-        _message_id,
-        _global_position
-      )
-    ;
-  END IF;
 
   IF current_setting('message_store.debug_write', true) = 'on' OR current_setting('message_store.debug', true) = 'on' THEN
     RAISE NOTICE '» write_message';
