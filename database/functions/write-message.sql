@@ -4,7 +4,8 @@ CREATE OR REPLACE FUNCTION message_store.write_message(
   "type" varchar,
   data jsonb,
   metadata jsonb DEFAULT NULL,
-  expected_version bigint DEFAULT NULL
+  expected_version bigint DEFAULT NULL,
+  lock_id bigint DEFAULT NULL
 )
 RETURNS bigint
 AS $$
@@ -13,7 +14,9 @@ DECLARE
   _stream_version bigint;
   _next_position bigint;
 BEGIN
-  PERFORM acquire_lock(write_message.stream_name);
+  IF lock_id IS NULL THEN
+    PERFORM acquire_lock(write_message.stream_name);
+  END IF;
 
   _stream_version := stream_version(write_message.stream_name);
 
