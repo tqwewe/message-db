@@ -11,4 +11,4 @@ GRANT EXECUTE ON FUNCTION message_store.id(varchar) TO message_store;
 GRANT EXECUTE ON FUNCTION message_store.is_category(varchar) TO message_store;
 GRANT EXECUTE ON FUNCTION message_store.message_store_version() TO message_store;
 GRANT EXECUTE ON FUNCTION message_store.stream_version(varchar) TO message_store;
-GRANT EXECUTE ON FUNCTION message_store.write_message(varchar, varchar, varchar, jsonb, jsonb, bigint, bigint) TO message_store;
+GRANT EXECUTE ON FUNCTION message_store.write_message(varchar, varchar, varchar, jsonb, jsonb, bigint) TO message_store;
